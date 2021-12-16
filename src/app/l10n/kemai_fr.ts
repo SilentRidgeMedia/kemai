@@ -69,14 +69,19 @@
         <translation>Étiquettes</translation>
     </message>
     <message>
-        <location filename="../activitywidget.ui" line="193"/>
+        <location filename="../activitywidget.ui" line="222"/>
         <source>Started at</source>
         <translation>Commencé à</translation>
     </message>
     <message>
-        <location filename="../activitywidget.ui" line="240"/>
+        <location filename="../activitywidget.ui" line="269"/>
         <source>00:00:00</source>
         <translation>00:00:00</translation>
+    </message>
+    <message>
+        <location filename="../activitywidget.ui" line="279"/>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -164,6 +169,14 @@
     </message>
 </context>
 <context>
+    <name>SecDialog</name>
+    <message>
+        <location filename="../secdialog.ui" line="13"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsWidget</name>
     <message>
         <location filename="../settingswidget.ui" line="14"/>
@@ -235,8 +248,8 @@
     </message>
     <message>
         <location filename="../taskwidget.ui" line="73"/>
-        <source>Done</source>
-        <translation>Terminé</translation>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -292,12 +305,12 @@
         <translation>À propos de Qt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>New version available</source>
         <translation>Nouvelle version disponible</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>Version %1 is available.
 
 %2</source>
@@ -306,12 +319,12 @@
 %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="315"/>
+        <location filename="../mainwindow.cpp" line="322"/>
         <source>No update</source>
         <translation>Aucune mise à jour</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="315"/>
+        <location filename="../mainwindow.cpp" line="322"/>
         <source>%1 is latest version.</source>
         <translation>%1 est la dernière version.</translation>
     </message>
@@ -319,30 +332,19 @@
 <context>
     <name>kemai::app::SettingsWidget</name>
     <message>
-        <location filename="../settingswidget.cpp" line="57"/>
+        <location filename="../settingswidget.cpp" line="64"/>
         <source>Language changed. Application restart is required.</source>
         <translation>La langue a changé. Le redémarrage de l&apos;application est requis.</translation>
     </message>
     <message>
-        <location filename="../settingswidget.cpp" line="78"/>
+        <location filename="../settingswidget.cpp" line="85"/>
         <source>Invalid reply.</source>
         <translation>Réponse invalide.</translation>
     </message>
     <message>
-        <location filename="../settingswidget.cpp" line="83"/>
+        <location filename="../settingswidget.cpp" line="90"/>
         <source>Connected to Kimai %1</source>
         <translation>Connecté à Kimai %1</translation>
-    </message>
-</context>
-<context>
-    <name>kemai::client::KimaiClient::KimaiClientPrivate</name>
-    <message>
-        <source>Error on request [%1]: %2</source>
-        <translation type="vanished">Erreur sur la requête [%1] : %2</translation>
-    </message>
-    <message>
-        <source>Unknown request [%1]</source>
-        <translation type="vanished">Requête inconnue [%1]</translation>
     </message>
 </context>
 </TS>

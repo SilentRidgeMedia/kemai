@@ -5,10 +5,14 @@
 #include "customerdialog.h"
 #include "projectdialog.h"
 #include "settings.h"
+#include "secdialog.h"
+#include "ui_activitywidget.h"
+
 
 #include "client/kimairequestfactory.h"
 
-#include <QTimeZone>
+#include <QtSql>
+#include <QtDebug>
 
 #include <spdlog/spdlog.h>
 
@@ -32,6 +36,31 @@ ActivityWidget::ActivityWidget(QWidget* parent) : QWidget(parent), mUi(new Ui::A
     mSecondTimer.setInterval(1000);
     mSecondTimer.setTimerType(Qt::PreciseTimer);
     mSecondTimer.start();
+
+    QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE" );
+
+    db.setDatabaseName( "./data.db" );
+
+    if( !db.open() )
+    {
+        qDebug() << db.lastError();
+        qFatal( "Failed to connect." );
+    }
+        
+    qDebug( "Connected!" );
+    QString query = "CREATE TABLE IF NOT EXISTS Profiles ("
+                    "Name VARCHAR(20),"
+                    "Username VARCHAR(20),"
+                    "Token VARCHAR(20),"
+                    "Host VARCHAR(40));";
+
+    QSqlQuery qry;
+    if(!qry.exec(query))
+    {
+        qDebug() << "Error creating table: ";
+    }
+    
+    
 }
 
 ActivityWidget::~ActivityWidget()
@@ -39,6 +68,7 @@ ActivityWidget::~ActivityWidget()
     mSecondTimer.stop();
     delete mUi;
 }
+
 
 void ActivityWidget::setKimaiClient(QSharedPointer<client::KimaiClient> kimaiClient)
 {
@@ -350,3 +380,12 @@ void ActivityWidget::updateControls()
 
     emit currentActivityChanged(enable);
 }
+
+void ActivityWidget::on_profile_clicked()
+{
+    SecDialog secd;
+    secd.setModal(true);
+    secd.exec();
+
+}
+

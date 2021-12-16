@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.11)
 project(Kemai)
 
 add_executable(${PROJECT_NAME} ${OS_BUNDLE})
@@ -8,9 +9,11 @@ set(SRCS
         customerdialog.cpp
         datareader.cpp
         durationedit.cpp
+        editdialog.cpp
         main.cpp
         mainwindow.cpp
         projectdialog.cpp
+        secdialog.cpp
         settingswidget.cpp
         taskwidget.cpp)
 
@@ -20,8 +23,10 @@ set(HDRS
         customerdialog.h
         datareader.h
         durationedit.h
+        editdialog.h
         mainwindow.h
         projectdialog.h
+        secdialog.h
         settingswidget.h
         taskwidget.h)
 
@@ -29,8 +34,10 @@ set(UIS
         activitydialog.ui
         activitywidget.ui
         customerdialog.ui
+        editdialog.ui
         mainwindow.ui
         projectdialog.ui
+        secdialog.ui
         settingswidget.ui
         taskwidget.ui)
 
@@ -65,4 +72,5 @@ endif ()
 
 target_sources(${PROJECT_NAME} PRIVATE ${SRCS} ${HDRS} ${UIS} ${RESX} ${KEMAI_ICNS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(${PROJECT_NAME} Qt::Widgets KemaiCore)
+find_package(Qt5Sql REQUIRED)
+target_link_libraries(${PROJECT_NAME} Qt::Sql Qt::Widgets KemaiCore)
