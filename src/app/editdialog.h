@@ -14,12 +14,13 @@ class EditDialog : public QDialog
 public:
     explicit EditDialog(QWidget *parent = nullptr);
     ~EditDialog();
+    Ui::EditDialog *ui;
 
 private slots:
     void on_pushButton_clicked();
 
 private:
-    Ui::EditDialog *ui;
+    
 };
 
 #endif // EDITDIALOG_H

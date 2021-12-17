@@ -1,9 +1,11 @@
 #include "secdialog.h"
 #include "ui_secdialog.h"
 #include "editdialog.h"
-#include "settingswidget.h"
 #include "ui_editdialog.h"
 #include "editdialog.h"
+#include "client/kimairequestfactory.h"
+#include "settings.h"
+
 
 #include <QtSql>
 
@@ -18,7 +20,7 @@ SecDialog::SecDialog(QWidget *parent) :
     qry1.prepare("SELECT Name FROM Profiles");
     qry1.exec();
     model->setQuery(qry1);
-    ui->comboBox->setModel(model);
+    ui->nameBox->setModel(model);
 
 }
 
@@ -43,19 +45,35 @@ void SecDialog::on_pushButton_clicked()
     ed.setModal(true);
     ed.exec();
 }
-void SecDialog::on_comboBox_currentIndexChanged(const QString &arg1,Ui::EditDialog *ui)
+void SecDialog::on_nameBox_currentIndexChanged(const QString &arg1)
 {
+    EditDialog etd;
+    QString name = ui->nameBox->currentText();
     QSqlQuery qry;
-    qry.prepare("SELECT * FROM Profiles WHERE Name = '"+arg1+"'");
-    qry.exec();
-    while(qry.next())
+    qry.prepare("select * from Profiles where Name = '"+name+"'");
+    if(qry.exec())
     {
-        ui->lineEdit->setText(qry.value(0).toString());
-        ui->lineEdit_2->setText(qry.value(1).toString());
-        ui->lineEdit_3->setText(qry.value(2).toString());
-        ui->lineEdit_4->setText(qry.value(3).toString());
-    };
+        while(qry.next())
+        {
+            etd.ui->lineEdit->setText(qry.value(0).toString());
+            etd.ui->lineEdit_2->setText(qry.value(1).toString());
+            etd.ui->lineEdit_3->setText(qry.value(2).toString());
+            etd.ui->lineEdit_4->setText(qry.value(3).toString());
+        }
+    }
+    else
+        qDebug() << qry.lastError();
+    qDebug("combo working");
+
 }
+/*void SecDialog::pushSettings()
+{
+    Settings settings;
+    EditDialog e2d;
+    settings.kemai.host = e2d.ui->lineEdit_2->text();
+    settings.kemai.username = e2d.ui->lineEdit_3->text();
+    settings.kemai.token = e2d.ui->lineEdit_4->text();
+}*/
 
 
 

@@ -58,7 +58,7 @@
     <string>Add</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="nameBox">
    <property name="geometry">
     <rect>
      <x>10</x>

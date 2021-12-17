@@ -2,7 +2,8 @@
 #define SECDIALOG_H
 
 
-#include "editdialog.h"
+#include "client/kimaiclient.h"
+
 
 #include <QDialog>
 
@@ -23,10 +24,11 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_comboBox_currentIndexChanged(const QString &arg1,Ui::EditDialog *ui);
+    void on_nameBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::SecDialog *ui;
+    void pushsettings();
 };
 
 #endif // SECDIALOG_H
