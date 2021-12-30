@@ -5,7 +5,6 @@
 #include "customerdialog.h"
 #include "projectdialog.h"
 #include "settings.h"
-#include "secdialog.h"
 #include "ui_activitywidget.h"
 
 
@@ -380,12 +379,3 @@ void ActivityWidget::updateControls()
 
     emit currentActivityChanged(enable);
 }
-
-void ActivityWidget::on_profile_clicked()
-{
-    SecDialog secd;
-    secd.setModal(true);
-    secd.exec();
-
-}
-

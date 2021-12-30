@@ -5,10 +5,16 @@
 #include "QTextStream"
 #include "QDataStream"
 #include "activitywidget.h"
-#include "secdialog.h"
+#include "settingswidget.h"
+#include "ui_settingswidget.h"
 
 #include <QtSql>
+#include<QString>
 
+QString key;
+using namespace kemai::app;
+
+QString name;
 
 EditDialog::EditDialog(QWidget *parent) :
     QDialog(parent),
@@ -42,5 +48,30 @@ void EditDialog::on_pushButton_clicked()
         qDebug() << quer.lastError();
     else
         qDebug( "Inserted!" );
-}
+    SettingsWidget stw;
+    stw.populatingComboBox();
+    close();
 
+}
+void EditDialog::recieveKey(QString key)
+{
+    QString name = key;
+}
+void EditDialog::getValues()
+{
+    QSqlQuery qry;
+    qry.prepare("select * from Profiles where Name = '"+name+"'");
+    if(qry.exec())
+    {
+        while(qry.next())
+        {
+            ui->lineEdit->setText(name);
+            ui->lineEdit_2->setText(qry.value(3).toString());
+            ui->lineEdit_3->setText(qry.value(1).toString());
+            ui->lineEdit_4->setText(qry.value(2).toString());
+        }
+    }
+    else
+        qDebug() << qry.lastError();
+    qDebug("here!"+name.toLatin1());
+}

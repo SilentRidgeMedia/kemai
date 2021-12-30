@@ -17,11 +17,16 @@ class SettingsWidget : public QWidget
 public:
     SettingsWidget(QWidget* parent = nullptr);
     ~SettingsWidget() override;
+    Ui::SettingsWidget* mUi         = nullptr;
+    QString dkey;
+    void populatingComboBox();
+    QString k;
+    
 
 signals:
     void settingsSaved();
     void cancelled();
-
+    void sendKey(QString key);
 private:
     void loadSettings();
     void saveSettings();
@@ -32,11 +37,13 @@ private:
     void onBtTestClicked();
     void onBtCancelClicked();
     void onBtSaveClicked();
+    void on_nameBox_currentIndexChanged(const QString& arg1);
+    void addUser();
+    void editUser();
 
 private:
-    Ui::SettingsWidget* mUi         = nullptr;
+    
     QAction* mActToggleTokenVisible = nullptr;
-
     // for connection testing
     QScopedPointer<client::KimaiClient> mKimaiClient;
 };

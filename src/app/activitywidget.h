@@ -28,7 +28,6 @@ signals:
     void currentActivityChanged(bool started);
 
 private slots:
-    void on_profile_clicked();
 
 private:
     void onClientReply(const client::KimaiReply& reply);
@@ -46,7 +45,6 @@ private:
     void onSecondTimeout();
 
     void updateControls();
-    void onprofileClicked();
 
 private:
     Ui::ActivityWidget* mUi;

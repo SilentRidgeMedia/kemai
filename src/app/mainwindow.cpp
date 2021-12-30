@@ -16,6 +16,7 @@
 #include "settings.h"
 #include "settingswidget.h"
 #include "taskwidget.h"
+#include "editdialog.h"
 
 using namespace kemai::app;
 using namespace kemai::client;
@@ -102,6 +103,9 @@ MainWindow::MainWindow() : mUi(new Ui::MainWindow)
     mTaskWidget = new TaskWidget;
     mUi->stackedWidget->addWidget(mTaskWidget);
 
+    EditDialog editDialog;
+    SettingsWidget st;
+
     /*
      * Connections
      */
@@ -115,6 +119,7 @@ MainWindow::MainWindow() : mUi(new Ui::MainWindow)
     connect(&mUpdater, &KemaiUpdater::checkFinished, this, &MainWindow::onNewVersionCheckFinished);
     connect(mActivityWidget, &ActivityWidget::currentActivityChanged, this, &MainWindow::onActivityChanged);
     connect(mSettingsWidget, &SettingsWidget::cancelled, this, &MainWindow::showSelectedView);
+    connect(&st,SIGNAL(sendKey(QString)),&editDialog, SLOT(recieveKey(QString)));
     connect(mSettingsWidget, &SettingsWidget::settingsSaved, [&]() {
         createKimaiClient();
         showSelectedView();

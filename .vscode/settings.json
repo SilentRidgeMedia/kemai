@@ -2,5 +2,9 @@
     "cmake.mingwSearchDirs": [
         "C:\\mingw-w64\\mingw64\\bin"
     ],
-    "cmake.generator": "MinGW Makefiles"
+    "cmake.generator": "MinGW Makefiles",
+    "files.associations": {
+        "new": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

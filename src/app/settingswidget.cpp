@@ -3,15 +3,21 @@
 
 #include "client/kimairequestfactory.h"
 #include "settings.h"
+#include "editdialog.h"
+#include "ui_editdialog.h"
 
 #include <QAction>
 #include <QDir>
 #include <QMessageBox>
 #include <QTranslator>
+#include <QtSql>
+#include <QString>
 
 using namespace kemai::app;
 using namespace kemai::client;
 using namespace kemai::core;
+
+QString k;
 
 SettingsWidget::SettingsWidget(QWidget* parent) : QWidget(parent), mUi(new Ui::SettingsWidget), mKimaiClient(new KimaiClient)
 {
@@ -43,6 +49,9 @@ SettingsWidget::SettingsWidget(QWidget* parent) : QWidget(parent), mUi(new Ui::S
     connect(mUi->btTest, &QPushButton::clicked, this, &SettingsWidget::onBtTestClicked);
     connect(mUi->btCancel, &QPushButton::clicked, this, &SettingsWidget::onBtCancelClicked);
     connect(mUi->btSave, &QPushButton::clicked, this, &SettingsWidget::onBtSaveClicked);
+    connect(mUi->nameBox, &QComboBox::currentTextChanged, this, &SettingsWidget::on_nameBox_currentIndexChanged);
+    connect(mUi->btAdd, &QPushButton::clicked, this, &SettingsWidget::addUser);
+    connect(mUi->btEdit, &QPushButton::clicked, this, &SettingsWidget::editUser);
     connect(mActToggleTokenVisible, &QAction::triggered, [&]() {
         if (mUi->leToken->echoMode() == QLineEdit::Password)
         {
@@ -66,6 +75,7 @@ SettingsWidget::SettingsWidget(QWidget* parent) : QWidget(parent), mUi(new Ui::S
     });
 
     loadSettings();
+    populatingComboBox();
 }
 
 SettingsWidget::~SettingsWidget()
@@ -105,7 +115,19 @@ void SettingsWidget::loadSettings()
         mUi->cbLanguage->setCurrentIndex(idLanguage);
     }
 }
-
+void SettingsWidget::on_nameBox_currentIndexChanged(const QString& arg1)
+{
+    k = mUi->nameBox->currentText();
+    emit sendKey(k);
+    QSqlQuery qry;
+    qry.prepare("SELECT * FROM Profiles WHERE Name = :name");
+    qry.bindValue(":name", mUi->nameBox->currentText());
+    qry.exec();
+    qry.next();
+    mUi->leHost->setText(qry.value(3).toString());
+    mUi->leUsername->setText(qry.value(1).toString());
+    mUi->leToken->setText(qry.value(2).toString());
+}
 void SettingsWidget::saveSettings()
 {
     Settings settings;
@@ -137,4 +159,27 @@ void SettingsWidget::onBtSaveClicked()
 {
     saveSettings();
     emit settingsSaved();
+}
+void SettingsWidget::addUser()
+{
+    EditDialog eda;
+    eda.setModal(true);
+    eda.exec();
+}
+void SettingsWidget::editUser()
+{
+    qDebug("here!"+dkey.toLatin1());
+    EditDialog ed;
+    ed.setModal(true);
+    ed.getValues();
+    ed.exec();
+}
+void SettingsWidget::populatingComboBox()
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQuery qry1;
+    qry1.prepare("SELECT Name FROM Profiles");
+    qry1.exec();
+    model->setQuery(qry1);
+    mUi->nameBox->setModel(model);
 }

@@ -13,7 +13,6 @@ set(SRCS
         main.cpp
         mainwindow.cpp
         projectdialog.cpp
-        secdialog.cpp
         settingswidget.cpp
         taskwidget.cpp)
 
@@ -26,7 +25,6 @@ set(HDRS
         editdialog.h
         mainwindow.h
         projectdialog.h
-        secdialog.h
         settingswidget.h
         taskwidget.h)
 
@@ -37,7 +35,6 @@ set(UIS
         editdialog.ui
         mainwindow.ui
         projectdialog.ui
-        secdialog.ui
         settingswidget.ui
         taskwidget.ui)
 
