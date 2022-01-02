@@ -17,7 +17,6 @@ using namespace kemai::app;
 using namespace kemai::client;
 using namespace kemai::core;
 
-QString k;
 
 SettingsWidget::SettingsWidget(QWidget* parent) : QWidget(parent), mUi(new Ui::SettingsWidget), mKimaiClient(new KimaiClient)
 {
@@ -117,8 +116,8 @@ void SettingsWidget::loadSettings()
 }
 void SettingsWidget::on_nameBox_currentIndexChanged(const QString& arg1)
 {
-    k = mUi->nameBox->currentText();
-    emit sendKey(k);
+    QString key = mUi->nameBox->currentText();
+    //emit sendKey(key);
     QSqlQuery qry;
     qry.prepare("SELECT * FROM Profiles WHERE Name = :name");
     qry.bindValue(":name", mUi->nameBox->currentText());
@@ -168,11 +167,11 @@ void SettingsWidget::addUser()
 }
 void SettingsWidget::editUser()
 {
-    qDebug("here!"+dkey.toLatin1());
-    EditDialog ed;
-    ed.setModal(true);
-    ed.getValues();
-    ed.exec();
+    QString dkey = mUi->nameBox->currentText();
+    EditDialog* ed = new EditDialog;
+    ed->setModal(true);
+    ed->getValues(dkey);
+    ed->exec();
 }
 void SettingsWidget::populatingComboBox()
 {

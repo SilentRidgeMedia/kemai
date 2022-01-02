@@ -18,15 +18,13 @@ public:
     SettingsWidget(QWidget* parent = nullptr);
     ~SettingsWidget() override;
     Ui::SettingsWidget* mUi         = nullptr;
-    QString dkey;
     void populatingComboBox();
-    QString k;
     
 
 signals:
     void settingsSaved();
     void cancelled();
-    void sendKey(QString key);
+    //void sendKey(QString key);
 private:
     void loadSettings();
     void saveSettings();

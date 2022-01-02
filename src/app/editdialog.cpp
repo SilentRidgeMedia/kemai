@@ -53,11 +53,11 @@ void EditDialog::on_pushButton_clicked()
     close();
 
 }
-void EditDialog::recieveKey(QString key)
+/*void EditDialog::recieveKey(QString key)
 {
     QString name = key;
-}
-void EditDialog::getValues()
+}*/
+void EditDialog::getValues(QString name)
 {
     QSqlQuery qry;
     qry.prepare("select * from Profiles where Name = '"+name+"'");

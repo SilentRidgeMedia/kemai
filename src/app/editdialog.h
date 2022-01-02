@@ -15,10 +15,9 @@ public:
     explicit EditDialog(QWidget *parent = nullptr);
     ~EditDialog();
     Ui::EditDialog *ui;
-    void getValues();
-    QString name;
+    void getValues(QString name);
 public slots:
-    void recieveKey(QString key);
+    //void recieveKey(QString key);
 
 private slots:
     void on_pushButton_clicked();

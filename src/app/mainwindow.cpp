@@ -119,7 +119,7 @@ MainWindow::MainWindow() : mUi(new Ui::MainWindow)
     connect(&mUpdater, &KemaiUpdater::checkFinished, this, &MainWindow::onNewVersionCheckFinished);
     connect(mActivityWidget, &ActivityWidget::currentActivityChanged, this, &MainWindow::onActivityChanged);
     connect(mSettingsWidget, &SettingsWidget::cancelled, this, &MainWindow::showSelectedView);
-    connect(&st,SIGNAL(sendKey(QString)),&editDialog, SLOT(recieveKey(QString)));
+    //connect(&st,SIGNAL(sendKey(QString)),&editDialog, SLOT(recieveKey(QString)));
     connect(mSettingsWidget, &SettingsWidget::settingsSaved, [&]() {
         createKimaiClient();
         showSelectedView();
