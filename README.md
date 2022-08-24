@@ -1,3 +1,9 @@
+# Archived
+While this initially was a good idea, it turned out there are other tools that suited our needs better.
+This was the work of our junior collegaue where he got an assignment to add feature for adding support for multiple servers and
+contains ui and some code in order to get it to work, which it, at atleast one time, did. 
+However code in current state is likley not usable at all. Use as you wish but let us know at info @ silentridge.io if you ever can get any use if it.
+
 # Kemai, a Kimai Desktop Client
 
 ## Build Status
